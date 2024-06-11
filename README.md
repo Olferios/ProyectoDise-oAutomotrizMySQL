@@ -6,7 +6,7 @@
     join vehiculo v on r.fkIdVehiculo=v.id
     where v.id=1;
 
-| placa  | fecha               | descripcion          | duracion | costoTotal |
+| **placa**  | **fecha**               | **descripcion**          | **duracion** | **costoTotal** |
 |--------|---------------------|----------------------|----------|------------|
 | ABC123 | 2024-06-10 10:00:01 | Cambio llantas       |        1 |   80000.00 |
 | ABC123 | 2024-06-10 09:00:00 | Reparación del motor |      3.5 |  100000.00 |
