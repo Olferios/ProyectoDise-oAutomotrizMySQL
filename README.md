@@ -5,6 +5,7 @@
     select v.placa,r.fecha, r.descripcion,r.duracion,r.costoTotal from reparacion r
     join vehiculo v on r.fkIdVehiculo=v.id
     where v.id=1;
+*** esto no se que es
 2. Calcular el costo total de todas las reparaciones realizadas por un empleado
 específico en un período de tiempo
 3. Listar todos los clientes y los vehículos que poseen
