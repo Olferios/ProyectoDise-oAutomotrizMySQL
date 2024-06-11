@@ -5,15 +5,16 @@
     select v.placa,r.fecha, r.descripcion,r.duracion,r.costoTotal from reparacion r
     join vehiculo v on r.fkIdVehiculo=v.id
     where v.id=1;
+    
+#### RESULTADO
+| **PLACA** | **FECHA**            | **DESCRIPCION**       | **DURACION** | **COSTOTOTAL** |
+|-----------|----------------------|-----------------------|--------------|----------------|
+| ABC123    | 2024-06-10 10:00:01  | Cambio llantas        |          1   |     80000.00   |
+| ABC123    | 2024-06-10 09:00:00  | Reparación del motor  |        3.5   |    100000.00   |
+| ABC123    | 2024-06-10 14:36:26  | Reparación de frenos  |        2.5   |      1000.00   |
 
-| **placa**  | **fecha**               | **descripcion**          | **duracion** | **costoTotal** |
-|--------|---------------------|----------------------|----------|------------|
-| ABC123 | 2024-06-10 10:00:01 | Cambio llantas       |        1 |   80000.00 |
-| ABC123 | 2024-06-10 09:00:00 | Reparación del motor |      3.5 |  100000.00 |
-| ABC123 | 2024-06-10 14:36:26 | Reparación de frenos |      2.5 |    1000.00 |
 
-2. Calcular el costo total de todas las reparaciones realizadas por un empleado
-específico en un período de tiempo
+### 2. Calcular el costo total de todas las reparaciones realizadas por un empleado específico en un período de tiempo
 3. Listar todos los clientes y los vehículos que poseen
 4. 4. Obtener la cantidad de piezas en inventario para cada pieza
 5. Obtener las citas programadas para un día específico
