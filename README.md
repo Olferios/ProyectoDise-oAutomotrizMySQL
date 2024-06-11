@@ -1,5 +1,5 @@
-#PROYECTO MYSQL DISEÑO AUTOMOTRIZ
-##CONSULTAS
+# PROYECTO MYSQL DISEÑO AUTOMOTRIZ
+## CONSULTAS
 1.  Obtener el historial de reparaciones de un vehículo específico
 2. Calcular el costo total de todas las reparaciones realizadas por un empleado
 específico en un período de tiempo
