@@ -30,9 +30,21 @@
     left join vehiculo v on v.fkIdCliente=c.id
     join modelo m on m.id=v.fkModelo;
 #### RESULTADO   
-| **COSTO_TOTAL** | **NOMBREEMPLEADO** | **APELLIDOEMPLEADO** |
-|-----------------|--------------------|----------------------|
-|       40000.00  | jhon               | duarte               |
+| NOMBRE | APELLIDO  | PLACA  | MODELO    |
+|--------|-----------|--------|-----------|
+| Juan   | Pérez     | ABC123 | Allegro   |
+| Juan   | Pérez     | KLM123 | Escape    |
+| María  | Gómez     | DEF456 | Dmax      |
+| María  | Gómez     | NOP456 | Civic     |
+| Pedro  | López     | GHI789 | CRV       |
+| Pedro  | López     | HIJ890 | CRV       |
+| Olfer  | Olaya     | JKL012 | Patrol    |
+| Carlos | Martínez  | MNO345 | Civic     |
+| Ana    | Rodríguez | PQR678 | CRV       |
+| Sofía  | Hernández | STU901 | Fiesta    |
+| Diego  | López     | YZA567 | HRV       |
+| Pablo  | Martín    | BDC234 | Explorer  |
+| Pablo  | Martín    | EFG567 | Mustang   |
 
 ### 4. Obtener la cantidad de piezas en inventario para cada pieza
     select p.nombre,i.cantidad from piezas p
