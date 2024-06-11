@@ -1,7 +1,7 @@
 # PROYECTO MYSQL DISEÑO AUTOMOTRIZ
 ## CONSULTAS
 ### 1.  Obtener el historial de reparaciones de un vehículo específico
-    HOLA Mundo
+    
     select v.placa,r.fecha, r.descripcion,r.duracion,r.costoTotal from reparacion r
     join vehiculo v on r.fkIdVehiculo=v.id
     where v.id=1;
