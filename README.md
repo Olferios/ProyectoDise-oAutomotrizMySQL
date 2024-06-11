@@ -399,9 +399,27 @@ call eliminarCita(1);
 
 Procedimiento
 ```
-
+DELIMITER $$
+DROP PROCEDURE IF EXISTS crearFactura $$
+CREATE PROCEDURE crearFactura(
+	in idReparacion int,
+    in pCantidad int,
+    in pPrecio float(10,2),
+    in pFecha datetime,
+    in pCliente int,
+    in pTotal float(10,2))
+BEGIN
+DECLARE ultimoId_factura int;
+Insert into facturadetalles (dkIdReparacion,cantidad,precio)
+VALUES (idReparacion,pCantidad,pPrecio);
+set ultimoId_factura=last_insert_id();
+insert into facturacioni(fkIdFacturacion,fecha,fkCliente,total)
+values(ultimoId_factura,pFecha,pCliente,pTotal);
+END $$
+DELIMITER ;
 ```
 ```
+CALL crearFactura(1, 5, 100.00, '2024-06-11 12:00:00', 3, 500.00);
 ```
 ### 5. Crear un procedimiento almacenado para obtener el historial de reparaciones de un vehículo--
 ```
@@ -465,11 +483,31 @@ Llamado:
 ### 8. Crear un procedimiento almacenado para insertar una nueva orden de compra
 Procedimiento:
 ```
+delimiter $$
+drop procedure if EXISTS nuevaORden $$
+CREATE PROCEDURE nuevaORden(
+	in idPieza int,
+    in Pcantidad int ,
+    in Pprecio float(10,2),
+    in pFecha date,
+    in pFkIdProveedor int,
+    in pFkEmpelado int)
+BEGIN
+DECLARE ultimo_id int;
 
+INSERT INTO ordendetalles(fkIdPieza,cantidad,precio)
+VALUES (idPieza,Pcantidad,Pprecio);
+
+set ultimo_id=LAST_INSERT_ID();
+
+INSERT INTO ordencompra(fkIdOrden,fecha,fkIdProveedor,fkEMpleado)
+VALUES(ultimo_id,pFecha,pFkIdProveedor,pFkEmpelado);
+END $$
+DELIMITER ;
 ```
 Llamado:
 ```
-
+CALL nuevaORden(1, 10, 25.50, '2024-06-11', 2, 3);
 ```
 ### 9. Crear un procedimiento almacenado para actualizar los datos de un cliente
 
