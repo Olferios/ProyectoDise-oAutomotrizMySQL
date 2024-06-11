@@ -1,6 +1,18 @@
 # PROYECTO MYSQL DISEÑO AUTOMOTRIZ
 ## CONSULTAS
-1.  Obtener el historial de reparaciones de un vehículo específico
+### 1.  Obtener el historial de reparaciones de un vehículo específico
+\  barra invertida
+`  acento invertido
+*  asterisco
+_  guión bajo
+{} llaves
+[] corchetes
+() paréntesis
+#  almohadilla
++  símbolo de suma
+-  guión
+.  punto
+!  exclamación
 2. Calcular el costo total de todas las reparaciones realizadas por un empleado
 específico en un período de tiempo
 3. Listar todos los clientes y los vehículos que poseen
