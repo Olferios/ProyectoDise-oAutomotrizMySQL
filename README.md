@@ -290,16 +290,12 @@ where date(r.fecha) like '2024-06%';
          SELECT r.id 
          FROM reparacion r 
          WHERE DATE(r.fecha) LIKE '2024-06%')) AS CantidadxServicio
-    FROM piezas p;
+    FROM piezas p
+    limit 1;
 #### RESULTADO
 | NOMBREPIEZA | CANTIDADXSERVICIO |
 |-------------|-------------------|
 | Tuerca      |                 2 |
-| Tornillo    |                 1 |
-| Arandela    |                 1 |
-| Junta       |                 1 |
-| Resorte     |                 0 |
-| Engranaje   |                 0 |
 
 ### 3. Obtener los proveedores que suministran las piezas más caras
     SELECT od.precio,(SELECT p.nombre FROM proveedor p
