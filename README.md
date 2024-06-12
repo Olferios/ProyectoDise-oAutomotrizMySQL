@@ -125,7 +125,7 @@ SELECT p.nombre, i.cantidad
 SELECT s.nombre, COUNT(r.fkServicio) AS cantidad
 FROM reparacion r
 JOIN servicios s ON s.id = r.fkServicio
-WHERE DATE(r.fecha) LIKE '2024-06%'
+WHERE r.fecha between'2024-06-01' and '2024-06-30'
 GROUP BY s.nombre
 ORDER BY cantidad DESC
 LIMIT 1;
@@ -133,14 +133,14 @@ LIMIT 1;
 #### RESULTADO
 | **NOMBRE**            | **CANTIDAD** |
 |-----------------------|--------------|
-| Revisión de frenos    | 2            |
+| Alineacion y Balanceo    | 3          |
 
 ### 11. Obtener el costo total de reparaciones para cada cliente en un período específico
 ```
 select r.costoTotal, cl.nombre,cl.apellido, v.placa from reparacion r
 join vehiculo v on v.id=r.fkIdVehiculo
 join cliente cl on cl.id=v.fkIdCliente
-where date(r.fecha) like '2024-06%';
+where r.fecha between '2024-06-01' and '2024-06-30';
 ```
 #### RESULTADO
 | **COSTOTOTAL** | **NOMBRE** | **APELLIDO** | **PLACA** |
@@ -157,7 +157,7 @@ where date(r.fecha) like '2024-06%';
     SELECT e.nombre, e.apellido, COUNT(r.fkIdEmpleado) AS cantidad_reparaciones
     FROM reparacion r
     JOIN empleado e ON e.id = r.fkIdEmpleado
-    WHERE DATE(r.fecha) LIKE '2024-06%'
+    WHERE r.fecha between'2024-06-01' and '2024-06-30'
     GROUP BY e.nombre, e.apellido
     ORDER BY cantidad_reparaciones DESC
     LIMIT 2;
@@ -172,7 +172,7 @@ where date(r.fecha) like '2024-06%';
     from reparacionPiezas rp
     join piezas p on p.id=rp.fkIdPieza
     join reparacion r on r.id=rp.fkIdReparacion
-    where date (r.fecha) like '2024-06%'
+    WHERE r.fecha between'2024-06-01' and '2024-06-30'
     group by p.nombre
     order by cantidadPieza desc;
 ### RESULTADO
@@ -241,7 +241,7 @@ where date(r.fecha) like '2024-06%';
 ### 18. Listar los empleados y el total de horas trabajadas en reparaciones en un período específico (asumiendo que se registra la duración de cada reparación)--
     select e.nombre, e.apellido, sum(r.duracion) as horasTrabajadas from reparacion r
     left join empleado e on e.id=r.fkIdEmpleado
-    where date (r.fecha) like '2024-06%'
+    WHERE r.fecha between'2024-06-01' and '2024-06-30'
     group by e.nombre, e.apellido;
 #### RESULTADO 
 | nombre | apellido  | horasTrabajadas |
@@ -254,7 +254,7 @@ where date(r.fecha) like '2024-06%';
     select e.nombre, e.apellido,s.nombre from reparacion r
     left join empleado e on e.id=r.fkIdEmpleado
     join servicios s on s.id=r.fkServicio
-    where date (r.fecha) like '2024-06%';
+    WHERE r.fecha between'2024-06-01' and '2024-06-30'
 #### RESULTADO
 
 | nombre | apellido  | nombre                |
@@ -273,7 +273,7 @@ where date(r.fecha) like '2024-06%';
     FROM cliente c
     JOIN vehiculo v ON c.id = v.fkIdCliente
     JOIN reparacion r ON v.id = r.fkIdVehiculo
-    where date (r.fecha) like '2024-06%'
+    where r.fecha  between DATE_SUB(CURDATE(),interval 1 year)and curdate()
     GROUP BY nombreCliente,apellidoCliente
     ORDER BY totalGastado DESC
     LIMIT 1;
@@ -285,13 +285,18 @@ where date(r.fecha) like '2024-06%';
 ### 2. Obtener la pieza más utilizada en reparaciones durante el último mes
     SELECT 
     p.nombre AS nombrePieza,
-    (SELECT COUNT(rp.fkIdPieza) FROM reparacionPiezas rp
-     WHERE rp.fkIdPieza = p.id AND rp.fkIdReparacion IN (
-         SELECT r.id 
-         FROM reparacion r 
-         WHERE DATE(r.fecha) LIKE '2024-06%')) AS CantidadxServicio
-    FROM piezas p
-    limit 1;
+    (SELECT COUNT(rp.fkIdPieza) 
+     FROM reparacionPiezas rp
+     WHERE rp.fkIdPieza = p.id 
+       AND rp.fkIdReparacion IN (
+           SELECT r.id 
+           FROM reparacion r 
+           WHERE r.fecha > DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
+       )
+    ) AS CantidadxServicio
+	FROM piezas p
+	LIMIT 1;
+
 #### RESULTADO
 | NOMBREPIEZA | CANTIDADXSERVICIO |
 |-------------|-------------------|
